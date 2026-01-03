@@ -55,16 +55,16 @@ func (c *clientHTTP) Get(id string) (*domain.User, error) {
 		return nil, reps.Err
 	}
 
-	if reps.StatusCode == 404 {
-		return nil, ErrNotFound{fmt.Sprintf("%s", reps)}
-	}
-
-	if reps.StatusCode > 299 {
+	if err := reps.FillUp(&dataResponse); err != nil {
 		return nil, fmt.Errorf("%s", reps)
 	}
 
-	if err := reps.FillUp(&dataResponse); err != nil {
-		return nil, err
+	if reps.StatusCode == 404 {
+		return nil, ErrNotFound{fmt.Sprintf("%s", dataResponse.Message)}
+	}
+
+	if reps.StatusCode > 299 {
+		return nil, fmt.Errorf("%s", dataResponse.Message)
 	}
 
 	return dataResponse.Data.(*domain.User), nil
