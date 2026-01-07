@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/Wito982/gocourse_domain/domain"
-	c "github.com/mercadolibre/golang-restclient/rest"
+	c "github.com/Wito982/golang-restclient/rest"
 )
 
 type (
@@ -56,7 +56,7 @@ func (c *clientHTTP) Get(id string) (*domain.Course, error) {
 	}
 
 	if err := reps.FillUp(&dataResponse); err != nil {
-		return nil, fmt.Errorf("%s", reps)
+		return nil, err
 	}
 
 	if reps.StatusCode == 404 {

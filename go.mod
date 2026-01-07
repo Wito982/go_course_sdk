@@ -4,7 +4,7 @@ go 1.25.2
 
 require (
 	github.com/Wito982/gocourse_domain v0.0.3
-	github.com/mercadolibre/golang-restclient v0.0.0-20170701022150-51958130a0a0
+	github.com/Wito982/golang-restclient v0.0.1
 )
 
 require (
